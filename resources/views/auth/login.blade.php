@@ -24,24 +24,40 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
+                @if (Session::has('msg'))
+                    <div class="alert alert-danger">
+                        {{ session('msg') }}
+                    </div>
+                @endif
                 <form action="{{ route('login') }}" method="post" id="loginForm">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Username" name="username"
+                        <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username"
                             id="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password"
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password"
                             id="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -69,44 +85,6 @@
     <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/dist/js/adminlte.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            let route = '';
-
-            //jika tombol submit di klik
-            $('#btnSubmit').click(function(e) {
-                e.preventDefault();
-                route = '/auth/login';
-                const formData = new FormData();
-                formData.append('_method', 'POST');
-                submit(formData);
-            });
-
-            //kelompok fungsi
-            function submit(formData) {
-                $.ajaxSetup({
-                    headers: {
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    }
-                });
-
-                $.ajax({
-                    type: "POST",
-                    url: route,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(res) {
-                        console.log(res.responseJSON);
-                    },
-                    error: function(err) {
-                        toastr.error(err.responseJSON.msgBody, err.responseJSON.msgTitle);
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 <!-- jQuery -->
 <script src="/assets/plugins/jquery/jquery.min.js"></script>

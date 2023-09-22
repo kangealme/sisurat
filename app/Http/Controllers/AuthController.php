@@ -4,36 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = Validator::make($request->all(), [
+        $credentials = $request->validate([
             'username' => 'required',
-            'password'=> 'required'
+            'password' => 'required'
         ]);
 
-        if($credentials->fails())
+        if(Auth::attempt($credentials))
         {
-            return response()->json([
-                return response()->json([
-                    
-            ]);
-            return response()->json([
-                'success' => false,
-                'msgTitle' => 'tes',
-                'msgBody' => 'Username dan atau password anda salah'
-            ], 422);
+
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        }else{
+            return redirect('/')->with('msg','Login Gagal');
         }
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return response()->json([
-            'success' => true,
-            'msgTitle' => 'Login Berhasil',
-            'msgBody' => 'Login berhasil'
-        ], 200);
-
-
+        return redirect('/');
     }
 }
