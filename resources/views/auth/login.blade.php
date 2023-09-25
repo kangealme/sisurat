@@ -25,15 +25,15 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 @if (Session::has('msg'))
-                    <div class="alert alert-danger">
-                        {{ session('msg') }}
-                    </div>
+                <div class="alert alert-danger">
+                    {{ session('msg') }}
+                </div>
                 @endif
                 <form action="{{ route('login') }}" method="post" id="loginForm">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username"
-                            id="username">
+                        id="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -47,17 +47,17 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password"
-                            id="password">
+                        id="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                         @error('password')
-                            <div class="invalid-feedback">
+                        <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
-                        @enderror
+                            @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -92,5 +92,21 @@
 <link rel="stylesheet" href="/assets/plugins/toastr/toastr.css">
 <script src="/assets/plugins/toastr/toastr.min.js"></script>
 {{-- <script src="/assets/plugins/toastr/customToastr.js"></script> --}}
+{{-- SweetAlert2  --}}
+<script src="/assets/plugins/sweetalert/sweetalert.all.js"></script>
+@if (Session::has('pesan'))
+    <script>
+        const title = "{{ Session::get('pesan')['title'] }}";
+        const text = "{{ Session::get('pesan')['text'] }}";
+        const icon = "{{ Session::get('pesan')['icon'] }}";
+
+        console.log(text);
+        Swal.fire({
+            title,
+            text,
+            icon
+        });
+    </script>
+@endif
 
 </html>

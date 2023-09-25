@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Blank Page</title>
+    <link rel="shortcut icon" href="/assets/img/favicon/doc.ico" type="image/x-icon">
+    <title>{{ env('APP_NAME') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

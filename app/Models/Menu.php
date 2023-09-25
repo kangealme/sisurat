@@ -9,7 +9,7 @@ class Menu extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'desc','role_id'];
+    protected $fillable = ['role_id','name', 'fa_icon', 'desc'];
 
     public function role()
     {

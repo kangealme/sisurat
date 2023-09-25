@@ -17,16 +17,13 @@ class MenuSeeder extends Seeder
             [
                 'role_id' => 1,
                 'name' => 'Pengguna',
+                'fa_icon' => 'fas fa-users',
                 'desc' => 'Menu Pengguna'
-            ],
-            [
-                'role_id' => 1,
-                'name' => 'Surat',
-                'desc' => 'Menu Surat'
             ],
             [
                 'role_id' => 2,
                 'name' => 'Surat',
+                'fa_icon' => 'fas fa-mail-bulk',
                 'desc' => 'Menu Surat'
             ],
         ];

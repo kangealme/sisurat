@@ -18,9 +18,9 @@
                         {{ auth()->user()->username }}
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
+                        {{-- <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div> --}}
                         <form action="{{ route('logout') }}" method="post" id="formLogout">
                             @csrf
                             <button class="dropdown-item" type="submit"><i class="fas fa-key mr-2"></i>Signout</button>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id');
             $table->string('name');
+            $table->string('fa_icon');
             $table->string('desc')->nullable();
             $table->timestamps();
         });
